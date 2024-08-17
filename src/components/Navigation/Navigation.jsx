@@ -7,7 +7,7 @@ export const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
-    <nav>
+    <nav className={css.navMenu}>
       <NavLink className={css.link} to="/">
         Home
       </NavLink>

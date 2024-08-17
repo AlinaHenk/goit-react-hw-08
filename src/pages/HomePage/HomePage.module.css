@@ -1,0 +1,10 @@
+.homePage {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
+.greeting {
+  font-size: xxx-large;
+  text-align: center;
+}

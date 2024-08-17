@@ -14,9 +14,11 @@ export default function UserMenu() {
   };
 
   return (
-    <div>
+    <div className={css.loggedMenu}>
       <p>{`Welcome, ${user.email} `}</p>
-      <button onClick={handleLogout}>Logout</button>
+      <button className={css.logoutButton} onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

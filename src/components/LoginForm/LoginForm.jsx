@@ -1,20 +1,21 @@
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
+import { useId } from "react";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./LoginForm.module.css";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const emailFieldId = useId();
+  const passwordFieldId = useId();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    dispatch(
-      logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    )
+  const handleSubmit = (values, actions) => {
+    dispatch(logIn(values))
       .unwrap()
       .then(() => {
         console.log("login success");
@@ -22,21 +23,37 @@ export default function LoginForm() {
       .catch(() => {
         console.log("login error");
       });
-
-    form.reset();
+    actions.resetForm();
   };
 
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().required("Required"),
+    password: Yup.string().required("Required"),
+  });
+
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <Formik
+      onSubmit={handleSubmit}
+      validationSchema={LoginSchema}
+      initialValues={initialValues}
+    >
+      <Form className={css.form}>
+        <label htmlFor={emailFieldId} className={css.label}>
+          Email
+          <Field type="email" name="email" id={emailFieldId} />
+          <ErrorMessage className={css.error} name="email" component="span" />
+        </label>
+        <label htmlFor={passwordFieldId} className={css.label}>
+          Password
+          <Field type="password" name="password" id={passwordFieldId} />
+          <ErrorMessage
+            className={css.error}
+            name="password"
+            component="span"
+          />
+        </label>
+        <button type="submit">Log In</button>
+      </Form>
+    </Formik>
   );
 }
