@@ -1,28 +1,27 @@
+import { useEffect } from "react";
 import Contact from "../../components/Contact/Contact";
 import css from "./ContactsPage.module.css";
-import { useSelector } from "react-redux";
-import { selectFilteredContacts } from "../../redux/contacts/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { selectIsLoading } from "../../redux/contacts/selectors";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
+import ContactList from "../../components/ContactList/ContactList";
+import { fetchContacts } from "../../redux/contacts/operations";
 
 export default function ContactsPage() {
-  const contactsInState = useSelector(selectFilteredContacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <div className={css.group}>
       <ContactForm />
       <SearchBox />
-      {contactsInState.map((contact) => (
-        <Contact contact={contact} key={contact.id} />
-      ))}
+      {isLoading && <b>Request in progress...</b>}
+      <ContactList />
     </div>
   );
 }
-
-// <div className={css.container}>
-//   <h1>Phonebook</h1>
-//   <ContactForm />
-//   <SearchBox />
-//   {isLoading && !error && <b>Request in progress...</b>}
-//   <ContactList />
-// </div>

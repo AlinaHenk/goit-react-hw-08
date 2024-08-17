@@ -12,6 +12,9 @@ const slice = createSlice({
     deleteContact(state, action) {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
+    resetContacts(state, action) {
+      state.items = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,5 +58,7 @@ const slice = createSlice({
       });
   },
 });
+
+export const { resetContacts } = slice.actions;
 
 export default slice.reducer;
