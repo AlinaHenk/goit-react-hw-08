@@ -62,10 +62,3 @@ export default function App() {
     </Layout>
   );
 }
-// <div className={css.container}>
-//   <h1>Phonebook</h1>
-//   <ContactForm />
-//   <SearchBox />
-//   {isLoading && !error && <b>Request in progress...</b>}
-//   <ContactList />
-// </div>

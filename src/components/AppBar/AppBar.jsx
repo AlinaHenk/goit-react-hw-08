@@ -4,11 +4,11 @@ import Contact from "../Contact/Contact";
 import { useSelector } from "react-redux";
 import AuthNav from "../AuthNav/AuthNav";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { PersistGate } from "redux-persist/integration/react";
 import css from "./AppBar.module.css";
 
 export const AppBar = () => {
-  const { isLoggedIn } = useSelector(selectIsLoggedIn);
-
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <header className={css.header}>
       <Navigation />
