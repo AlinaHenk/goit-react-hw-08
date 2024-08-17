@@ -1,0 +1,9 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.group > * {
+  flex: 0 0 20%;
+}

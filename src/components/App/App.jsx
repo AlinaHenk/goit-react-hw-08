@@ -27,8 +27,10 @@ export default function App() {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  const { isRefreshing } = useSelector(selectIsRefreshing);
+
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
