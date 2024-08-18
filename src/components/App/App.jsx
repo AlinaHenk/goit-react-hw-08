@@ -33,7 +33,9 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />

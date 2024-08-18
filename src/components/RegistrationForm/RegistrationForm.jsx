@@ -3,9 +3,9 @@ import { register } from "../../redux/auth/operations";
 import { useId } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import css from "./RegisterForm.module.css";
+import css from "./RegistrationForm.module.css";
 
-export default function RegisterForm() {
+export default function RegistrationForm() {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -65,7 +65,7 @@ export default function RegisterForm() {
             component="span"
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit">Register</button>
       </Form>
     </Formik>
   );
